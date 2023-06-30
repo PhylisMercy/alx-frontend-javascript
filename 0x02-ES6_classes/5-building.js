@@ -1,13 +1,13 @@
 export default class Building {
   constructor(sqft) {
-    if (this.constructor === Building) {
-      throw new Error('Abstract class "Building" cannot be instantiated.');
+    if (this.constructor !== Building
+      && this.evacuationWarningMessage === undefined) {
+      throw Error('Class extending Building must override evacuationWarningMessage');
     }
+    this._sqft = sqft;
+  }
 
-    if (this.evacuationWarningMessage === undefined) {
-      throw new Error('Class extending Building must override evacuationWarningMessage.');
-    }
-
+  set sqft(sqft) {
     this._sqft = sqft;
   }
 
@@ -15,4 +15,3 @@ export default class Building {
     return this._sqft;
   }
 }
-
